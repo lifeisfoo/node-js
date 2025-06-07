@@ -76,10 +76,10 @@ server.on("connection", function (sock) {
     sockets.push(sock);
     setName(sock, socketToId(sock));
     broadcastMessage(sockets, joinedMessage(sock));
-    ld.addUser(socketToId(sock));
+    ld.addUser(getName(sock));
 
     sock.on("data", function (data) {
-        ld.touchUser(socketToId(sock));
+        ld.touchUser(getName(sock));
         processMessage(sock, data.toString());
     });
 
@@ -87,6 +87,6 @@ server.on("connection", function (sock) {
         sockets = getSocketsExcluding(sockets, sock);
         broadcastMessage(sockets, leftMessage(sock));
         console.log("CLOSED: " + socketToId(sock));
-        ld.removeUser(socketToId(sock));
+        ld.removeUser(getName(sock));
     });
 });

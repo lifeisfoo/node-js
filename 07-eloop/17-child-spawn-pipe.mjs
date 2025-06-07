@@ -1,6 +1,6 @@
 import { spawn } from "child_process";
 
-const ls = spawn("ls", ["*.mjs"], { shell: true });
+const ls = spawn("ls", ["*.mjs"], { shell: true }); // https://nodejs.org/api/deprecations.html#DEP0190
 const grep = spawn("grep", ["http"]);
 
 ls.stdout.on("data", (data) => {
